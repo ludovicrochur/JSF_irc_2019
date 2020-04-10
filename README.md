@@ -15,3 +15,5 @@ To use the project :
 - `npm i express ejs`
 - `npm run devStart`
 - Go on this url : `http://127.0.0.1:3000/`
+
+If it's not working, try to delete in `node_modules` the `nodemon` folder and in the `.bin` folder the `nodemon` file.
