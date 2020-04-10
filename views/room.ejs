@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Chat App</title>
+    <script>
+      //Permet de rendre la variable accessible partout
+      const roomName = "<%= roomName %>";
+    </script>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+    <style>
+      body {
+        padding: 0;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        font: normal 15px Helvetica, Arial, sans-serif;
+      }
+      a {
+        background-color: rgba(0, 0, 0, 0.219);
+        color: white;
+        padding: 5px 15px;
+        position: relative;
+        text-decoration: none;
+        border-radius: 30px;
+      }
+
+      a:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+      }
+
+      a:active {
+        box-shadow: none;
+        top: 5px;
+      }
+      #all-container {
+        margin: 9em auto 0 auto;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        width: 500px;
+        height: 700px;
+      }
+      #new-room-container {
+        border-bottom: 2px solid rgb(238, 238, 238);
+        height: 100px;
+        width: 300px;
+        padding: 0 0 40px 0;
+        margin: 15px auto 30px auto;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      #room-container {
+        height: 100px;
+        width: 300px;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+      }
+      #room {
+        height: 100px;
+        width: 300px;
+        margin: 0 auto 0 auto;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+      }
+      #title {
+        margin: 0 auto 0 auto;
+        padding: 0 0 0px 0;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        height: auto;
+        width: 300px;
+        color: rgb(238, 238, 238);
+        text-transform: uppercase;
+        letter-spacing: 18px;
+      }
+      h1 {
+        display: block;
+        font-size: 2em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: normal;
+      }
+      button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 30px;
+      }
+      .button1 {
+        background-color: rgba(0, 0, 0, 0.219);
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 30px;
+      }
+
+      .button1:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgb(60, 141, 62);
+      }
+      input {
+        -webkit-writing-mode: horizontal-tb !important;
+        text-rendering: auto;
+        color: -internal-light-dark-color(white, white);
+        letter-spacing: normal;
+        word-spacing: normal;
+        text-transform: none;
+        text-indent: 0px;
+        text-shadow: none;
+        display: inline-block;
+        text-align: start;
+        -webkit-appearance: textfield;
+        background-color: -internal-light-dark-color(white, white);
+        -webkit-rtl-ordering: logical;
+        cursor: text;
+        margin: 0em;
+        font: 400 13.3333px Helvetica;
+        padding: 5px 10px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: rgb(238, 238, 238);
+        border-image: initial;
+        border-radius: 30px;
+      }
+
+      #message-container {
+        width: 80%;
+        max-width: 1200px;
+      }
+
+      #message-container div {
+        background-color: #ccc;
+        padding: 5px;
+      }
+
+      #message-container div:nth-child(2n) {
+        background-color: #fff;
+      }
+
+      #send-container {
+        position: fixed;
+        padding-bottom: 30px;
+        bottom: 0;
+        background-color: white;
+        max-width: 1200px;
+        width: 80%;
+        display: flex;
+      }
+
+      #message-input {
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message-container"></div>
+    <form id="send-container">
+      <input type="text" id="message-input" />
+      <button class="button1" type="submit" id="send-button">Envoyer</button>
+      <button style="margin: 0 0 0 10px;" onclick="history.back()">
+        Retour à l'accueil
+      </button>
+    </form>
+  </body>
+</html>

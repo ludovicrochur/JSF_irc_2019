@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat App</title>
+  <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script defer src="script.js"></script>
+  <style>
+    body {
+      padding: 0;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      font: normal 15px Helvetica, Arial, sans-serif;
+    }
+    a {
+    background-color: rgba(0, 0, 0, 0.219);
+    color: white;
+    padding: 5px 15px;
+    position: relative;
+    text-decoration: none;
+    border-radius: 30px;
+    }
+
+    a:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
+    a:active {
+      box-shadow: none;
+      top: 5px;
+    }
+    #all-container{
+      margin: 9em auto 0 auto;
+      justify-content: center;
+      align-items: center;
+      border-radius: 30px;
+      width: 500px;
+      height: 700px;
+    }
+    #new-room-container {
+      border-bottom: 2px solid rgb(238, 238, 238);
+      height: 100px;
+      width: 300px;
+      padding: 0 0 40px 0;
+      margin: 15px auto 30px auto;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+    #room-container {
+      height: 100px;
+      width: 300px;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
+    }
+    #room {
+      height: 100px;
+      width: 300px;
+      margin: 0 auto 0 auto;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+    #title {
+      margin: 0 auto 0 auto;
+      padding: 0 0 0px 0;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      height: auto;
+      width: 300px;
+      color: rgb(238, 238, 238);
+      text-transform: uppercase;
+      letter-spacing: 18px;
+    }
+    h1 {
+      display: block;
+      font-size: 2em;
+      margin-block-start: 0.67em;
+      margin-block-end: 0.67em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: normal;
+    }
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 5px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      border-radius: 30px;
+    }
+    button:hover {
+      background-color: rgb(60, 141, 62);
+    }
+    input {
+      -webkit-writing-mode: horizontal-tb !important;
+      text-rendering: auto;
+      color: -internal-light-dark-color(white, white);
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      text-indent: 0px;
+      text-shadow: none;
+      display: inline-block;
+      text-align: start;
+      -webkit-appearance: textfield;
+      background-color: -internal-light-dark-color(white, white);
+      -webkit-rtl-ordering: logical;
+      cursor: text;
+      margin: 0em;
+      font: 400 13.3333px Helvetica;
+      padding: 5px 10px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: rgb(238, 238, 238);
+      border-image: initial;
+      border-radius: 30px;
+}
+  </style>
+</head>
+<body>
+  <div id="all-container">
+    <div id="title">
+      <h1>Chat App</h1>
+    </div>
+    <div id="new-room-container">
+      <div>
+        <form style="width: 300px;" action="/room" method="POST">
+        <input style="width: 280px;" placeholder="Nom de votre nouveau canal" name="room" type="text" required><br><br>
+        <button type="submit">Créer</button>
+      </div>
+      </form>
+    </div>
+    <div id="room-container">
+      <% Object.keys(rooms).forEach(room => { %>
+        <div id="room">
+          <label style="margin: 0 auto 0 0; color: grey;" id="<%= room %>" onclick="rename(this)">
+              <%= room %>
+            </label>
+            &nbsp;
+            <a href="/<%= room %>">Rejoindre</a>
+            <button onclick="removeElement()">Supprimer</button>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+<script>
+    function removeElement(room){
+      var element = document.getElementById(room);
+      element.parentNode.removeChild(element);
+    }
+  
+    function rename(room){
+      var id = '#' + room.id;
+      console.log(id);
+      var element = prompt('Renommer le channel');
+      document.querySelector(id).textContent = element;
+    }
+  </script>
+</html>
